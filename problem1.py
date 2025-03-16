@@ -52,3 +52,30 @@ class DFSSolution:
         
         dfs(root.left, root.right)
         return root
+
+
+# Time Complexity : O(n), n-> nodes in tree
+# Space Complexity : O(hxs)
+# Did this code successfully run on Leetcode : YES
+
+# Any problem you faced while coding this : NO
+
+class BetterDFSSolution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root:
+            return None
+
+        def dfs(root):
+            # base
+            if not root.left:
+                return
+            
+            # logic
+            root.left.next = root.right
+            if root.next:
+                root.right.next = root.next.left
+            dfs(root.left)
+            dfs(root.right)
+        
+        dfs(root)
+        return root
